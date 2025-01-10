@@ -1,0 +1,46 @@
+fjCierraMes > fjExcedidos.frm
+
+1) Se debe crear el C:\CP\Excedidos.xls (con Nro cobro y Valor, utilizo Numero de cobro y NO Numero de socio por que es por aquel que se hacen los descuentos tanto en jefatura como en el centro). El ùltimo renglón con ceros.
+
+2) Pulsar el botón: Jefatura ( nPrmEx = 1 > EInicio)  o Círculo ( nPrmEx = 2 > EInicio)
+
+3) Sub eInicio:
+
+3.1) Verifica que se generó el mes, 
+rCierraMes_VerifMesEsteCompleto (31 y 32)
+
+3.2) AbrePlanilla c:\cp\CPExcedidos.xls
+
+3.3) Suma excedidos (mfSumaExcedidos) y muestra el total, para continuar o no.
+
+3.3.a) Abre archivo de salida: C:\CP\MovAAAAMMx, donde x=1 Jefat y x=2 Circulo
+
+3.3.b) Crea el recrodset adoExced con los excedidos (lCobr y sVal) y va sumando el total en sTot
+
+
+3.3.c) Verifica que todos los socios excedidos (por numero de cobro) estan en la tabla tbl_socios
+
+4) Ofrece los botones cmdLista y cmdSigue. El cmdLista ejecuta fjMiReporte (No está implementado)
+
+5) Comando SIGUE: van a quedar 3 recordset a) con los datos del prepago adoPrinc, b) con los excedidos adoExced, c) con lo que se envió a cobrar adoAux
+
+5.1) Toma número de recibo (del la clase cRecib.mfTomayGuardaNroRecibo) en vplNroRecibo
+
+5.2) Toma los registro involucrados de la tabla tbl_PrePago en el recordset adoPrinc
+
+5.2.a) Muestra los registros en el grid fjMome.DataGrid1
+
+6) Crea el recordset adoAux con los totales que se enviaron a descontar (en jefatura o en circulo)(Jefatura.dbf o dto.dbf)
+
+7) Recorre el adoAux
+
+7.1) Busca al socio en excedidos adoExced
+
+7.1.a) Si no está, paga todos los registros que estan en adoPrinc (la tabla prepagos)
+
+7.1.b) Si está excedido, paga los registros que puede, que estan en adoPrinc (la tabla prepagos)
+
+' 8) cmdSigue: crea un adoAux unicamente con los Nos de cobro en el campo lCobr
+' 8b) Muestra los registros en fjMome.Datagrid1
+' 9)
+

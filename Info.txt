@@ -1,0 +1,8 @@
+Nota: Proyecto > agregar archivo > seleccionar como documento relacionado
+
+11/3/2005
+Bùsqueda de mayor velocidad, al ingresar un conforme o pagar
+Que las tablas las abra al principio
+
+
+ver adonumorden y adob en frmOrdenes
